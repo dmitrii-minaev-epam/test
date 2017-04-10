@@ -3,12 +3,19 @@ node {
         echo "\u2600 BUILD_URL=${env.BUILD_URL}"
         def workspace = pwd()
         echo "\u2600 workspace=${workspace}"
+        f = new File('test.file')
+        if (!f.exists()) {
+            sh("touch test.file")
+        } else {
+            fail("file exists")
+        }
         checkout scm
     }
     stage('\u2777 two') {
         echo "\u2600 BUILD_URL=${env.BUILD_URL}"
         def workspace = pwd()
         echo "\u2600 workspace=${workspace}"
-        sh("touch ok")
+        sh("if [ -f test.file ]; then echo 'touch ok'; else 'touch failed'; fi")
+        sh("rm test.file")
     }
 }
