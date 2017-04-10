@@ -3,13 +3,14 @@ node {
         echo ">>>>>>> BUILD_URL=${env.BUILD_URL}"
         def workspace = pwd()
         echo ">>>>>>> workspace=${workspace}"
+        checkout scm
         f = new File('test.file')
         if (!f.exists()) {
-            sh(">>>>>>>>>>touch test.file")
+            sh("touch test.file")
+            sh("echo '>>>>>>>>>>file created'")
         } else {
             fail(">>>>>>>>file exists")
         }
-        checkout scm
     }
     stage('\u2777 two') {
         echo ">>>>>>> BUILD_URL=${env.BUILD_URL}"
