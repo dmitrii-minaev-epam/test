@@ -15,7 +15,7 @@ node {
         echo "\u2600 BUILD_URL=${env.BUILD_URL}"
         def workspace = pwd()
         echo "\u2600 workspace=${workspace}"
-        sh("if [ -f test.file ]; then echo 'touch ok'; else 'touch failed'; fi")
+        sh("if [ -f test.file ]; then echo 'touch ok'; else echo 'touch failed'; fi")
         sh("rm test.file")
     }
 }
